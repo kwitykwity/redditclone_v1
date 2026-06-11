@@ -1,0 +1,22 @@
+.sidebar { width: 312px; flex-shrink: 0; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 14px; margin-bottom: 12px; }
+.title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+.desc { font-size: 12px; color: var(--text2); line-height: 1.6; margin-bottom: 10px; }
+.metaRow { font-size: 12px; color: var(--text2); margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
+.stats { display: flex; gap: 16px; margin: 12px 0; }
+.stat { display: flex; flex-direction: column; }
+.stat strong { font-size: 16px; font-weight: 700; color: var(--text); }
+.stat span { font-size: 11px; color: var(--text2); }
+.guideBtn { width: 100%; background: var(--surface2); border: 1px solid var(--border2); border-radius: var(--radius-lg); padding: 8px; font-size: 13px; font-weight: 600; color: var(--text); cursor: pointer; margin-bottom: 8px; }
+.guideBtn:hover { background: var(--surface3); }
+.joinBtn { width: 100%; background: var(--blue); color: #0a1a20; border: none; border-radius: var(--radius-lg); padding: 9px; font-size: 14px; font-weight: 700; cursor: pointer; margin-bottom: 8px; }
+.joinBtn:hover { background: var(--blue2); }
+.createBtn { width: 100%; background: transparent; color: var(--blue); border: 1px solid var(--blue); border-radius: var(--radius-lg); padding: 9px; font-size: 14px; font-weight: 700; cursor: pointer; }
+.createBtn:hover { background: #0e2a3a; }
+.rulesTitle { font-size: 11px; font-weight: 700; color: var(--text2); letter-spacing: 0.06em; margin-bottom: 10px; }
+.rule { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--border); cursor: pointer; }
+.rule:last-child { border-bottom: none; }
+.rule:hover .ruleText { color: var(--text); }
+.ruleNum { font-size: 13px; font-weight: 700; color: var(--text2); width: 18px; }
+.ruleText { flex: 1; font-size: 13px; color: var(--text2); }
+.chevron { font-size: 11px; color: var(--text3); }
