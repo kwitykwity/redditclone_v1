@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Topbar from './Topbar.jsx'
 import LeftSidebar from './LeftSidebar.jsx'
@@ -5,7 +6,7 @@ import SubHeader from './SubHeader.jsx'
 import PostCard from './PostCard.jsx'
 import Sidebar from './Sidebar.jsx'
 import ThreadView from './ThreadView.jsx'
-import { TakeoverAd, BannerAd, NativeAd, VideoAd, PromotedPostAd, SidebarAd } from './AdUnits.jsx'
+import { TakeoverAd, BannerAd, NativeAd, VideoAd, SidebarAd } from './AdUnits.jsx'
 import { POSTS } from './data.js'
 import styles from './App.module.css'
 
@@ -20,16 +21,52 @@ const PROMOTED_POST = {
   comments: 0,
 }
 
+const SORT_OPTIONS = ['Best', 'New', 'Top', 'Rising']
+
+function sortPosts(posts, sort) {
+  const sorted = [...posts]
+  switch (sort) {
+    case 'New':
+      // Sort by timeAgo — lower hours = newer
+      return sorted.sort((a, b) => {
+        const aHrs = parseFloat(a.timeAgo)
+        const bHrs = parseFloat(b.timeAgo)
+        return aHrs - bHrs
+      })
+    case 'Top':
+      // Highest votes first
+      return sorted.sort((a, b) => b.votes - a.votes)
+    case 'Rising':
+      // Lowest comment count = newer post gaining traction
+      return sorted.sort((a, b) => a.comments - b.comments)
+    case 'Best':
+    default:
+      return sorted.sort((a, b) => b.votes - a.votes)
+  }
+}
+
 function Feed() {
+  const [sort, setSort] = useState('Best')
+  const sortedPosts = sortPosts(POSTS, sort)
+
   return (
     <main className={styles.main}>
       <SubHeader />
       <div className={styles.content}>
         <div className={styles.feed}>
           <div className={styles.sortBar}>
-            <button className={`${styles.sortBtn} ${styles.active}`}>Best ∨</button>
+            {SORT_OPTIONS.map(s => (
+              <button
+                key={s}
+                className={`${styles.sortBtn} ${sort === s ? styles.active : ''}`}
+                onClick={() => setSort(s)}
+              >
+                {s === 'Best' ? '🔥' : s === 'New' ? '✨' : s === 'Top' ? '📈' : '🚀'} {s}
+              </button>
+            ))}
             <button className={styles.viewBtn}>⊞ ∨</button>
           </div>
+
           <div className={styles.highlights}>
             <div className={styles.highlightsHeader}>
               <span>⚑</span> Community highlights
@@ -50,18 +87,18 @@ function Feed() {
           </div>
 
           <TakeoverAd visible={true} />
-          <PostCard post={POSTS[0]} />
+          <PostCard post={sortedPosts[0]} />
           <BannerAd visible={true} />
-          <PostCard post={POSTS[1]} />
+          <PostCard post={sortedPosts[1]} />
           <NativeAd visible={true} />
-          <PostCard post={POSTS[2]} />
+          <PostCard post={sortedPosts[2]} />
           <VideoAd visible={true} />
-          <PostCard post={POSTS[3]} />
+          <PostCard post={sortedPosts[3]} />
           <PostCard post={PROMOTED_POST} promoted />
-          <PostCard post={POSTS[4]} />
-          <PostCard post={POSTS[5]} />
-          <PostCard post={POSTS[6]} />
-          <PostCard post={POSTS[7]} />
+          <PostCard post={sortedPosts[4]} />
+          <PostCard post={sortedPosts[5]} />
+          <PostCard post={sortedPosts[6]} />
+          <PostCard post={sortedPosts[7]} />
         </div>
         <div className={styles.sidebarCol}>
           <SidebarAd visible={true} />

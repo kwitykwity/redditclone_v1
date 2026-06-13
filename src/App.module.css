@@ -6,8 +6,8 @@
 
 .sortBar { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
 .sortBtn { background: var(--surface2); border: 1px solid var(--border); border-radius: 20px; padding: 6px 14px; font-size: 13px; font-weight: 600; color: var(--text); cursor: pointer; }
-.sortBtn:hover { background: var(--surface3); }
-.active { border-color: var(--border2); }
+.sortBtn:hover { background: var(--surface3); color: var(--text); }
+.active { background: var(--surface3); color: var(--text); font-weight: 700; border-color: var(--border2); }
 .viewBtn { background: var(--surface2); border: 1px solid var(--border); border-radius: 20px; padding: 6px 12px; font-size: 13px; color: var(--text2); cursor: pointer; }
 .viewBtn:hover { background: var(--surface3); }
 
